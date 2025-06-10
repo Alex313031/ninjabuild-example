@@ -28,8 +28,14 @@ import("//build/build_args.gni")
 _shared_binary_target_configs = [ "//build:compiler_defaults" ]
 
 # GCC as default, MSVC on Windows
-if (is_gcc) {
+if (use_gcc) {
   set_default_toolchain("//build/toolchain:gcc")
+} else if (use_msvc) {
+  set_default_toolchain("//build/toolchain:msvc")
+} else if (use_clang) {
+  set_default_toolchain("//build/toolchain:llvm")
+} else {
+  print("Invalid toolchain")
 }
 
 # The main compiler configuration

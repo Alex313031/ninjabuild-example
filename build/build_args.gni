@@ -33,18 +33,23 @@ declare_args() {
 }
 
 if (use_gcc) {
-  assert(is_posix "GCC cannot be used as the toolchain on non-POSIX platforms")
-  assert(use_msvc = false "GCC cannot be used as the toolchain when use_msvc is true")
-  assert(use_clang = false "GCC cannot be used as the toolchain when use_clang is true")
+  use_msvc = false
+  use_clang = false
+  assert(is_posix, "GCC cannot be used as the toolchain on non-POSIX platforms")
+  assert(!use_msvc, "GCC cannot be used as the toolchain when use_msvc is true")
+  assert(!use_clang, "GCC cannot be used as the toolchain when use_clang is true")
 }
 
 if (use_msvc) {
   assert(target_os == "win" || is_win, "MSVC cannot be used as the toolchain to target non-Windows platforms")
-  assert(use_gcc = false "MSVC cannot be used as the toolchain when use_gcc is true")
-  assert(use_clang = false "MSVC cannot be used as the toolchain when use_clang is true")
+  assert(!use_gcc, "MSVC cannot be used as the toolchain when use_gcc is true")
+  assert(!use_clang, "MSVC cannot be used as the toolchain when use_clang is true")
+  declare_args() {
+    is_msvc = true
+  }
 }
 
 if (use_clang) {
-  assert(use_gcc = false "LLVM/Clang cannot be used as the toolchain when use_gcc is true")
-  assert(use_msvc = false "LLVM/Clang cannot be used as the toolchain when use_msvc is true")
+  assert(!use_gcc, "LLVM/Clang cannot be used as the toolchain when use_gcc is true")
+  assert(!use_msvc, "LLVM/Clang cannot be used as the toolchain when use_msvc is true")
 }

@@ -1,0 +1,16 @@
+declare_args() {
+  # Whether to build with AVX instructions.
+  # See https://en.wikipedia.org/wiki/Advanced_Vector_Extensions
+  use_avx = true
+
+  # Whether to keep DCHECK on, even in a release build.
+  # See dcheck.h
+  dcheck_is_on = is_debug
+
+  # Level of debugging symbols to include
+  # 0 = none, 1 = minimal, 2 = all
+  symbol_level = -1
+
+  # If this is a cmdline only app
+  is_console_app = false
+}
