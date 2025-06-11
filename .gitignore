@@ -17,3 +17,5 @@ Thumbs.db
 *.stamp
 
 /tools/temp
+!/tools/*.exe
+!/tools/llvm/win/bin/*.exe
